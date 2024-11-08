@@ -1,0 +1,98 @@
+#home {
+    display: flex;
+    min-height: calc(100vh - 91px);
+    position: relative;
+    background-image: url(../images/corinthians/fundoNeoQuimca.jpg);
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo escura com opacidade */
+    background-blend-mode: overlay;
+}
+
+#ini {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 5%;
+}
+
+#ini .title {
+    font-size: 4rem;
+    color: var(--color-neutral-0);;
+}
+
+#ini .title span {
+    color: var(--color-primary-3);
+}
+
+#ini .description {
+    font-size: 1.2rem;
+    color: var(--color-primary-4);
+
+}
+
+#ini_buttons {
+    display: flex;
+    gap: 24px;
+}
+
+#ini_buttons a {
+    text-decoration: none;
+    color: var(--color-neutral-2);;
+}
+
+.shape {
+    background-color: var(--color-primary-4);
+    width: 60%;
+    height: 80vh; 
+    position: absolute;
+    border-radius: 40% 30% 0% 20%;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+#banner {
+    width: 100%;
+    height: 100%; 
+    position: relative;
+}
+
+#banner img {
+    width: 100%; 
+    height: 100%; 
+    border-radius: 40% 30% 0% 20%;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.4); 
+
+}
+
+
+@media screen and (max-width: 1170px) {
+    #home {
+        min-height: 100%;
+        padding-top: 0px;
+    }
+
+    #banner,
+    #banner img,
+    #home .shape {
+        display: none;
+    }
+
+    #cta {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #phone_button button {
+        display: none;
+    }
+}
