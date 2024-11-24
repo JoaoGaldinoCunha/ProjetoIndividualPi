@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz | Loucos por corinthians</title>
+    <link rel="stylesheet" href="./styles/quesions.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+    <main>
+        <div class="conteiner">
+            <h2>Quiz Corinthians</h2>
+            <div>
+                <span id="spanQtd"></span>
+                <span id="questions"></span>
+                <div class="anwsers">
+                </div>
+            </div>
+            <div class="finsh">
+                <span></span>
+                <button>Reniciar</button>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script>
+    const listaDeQuestoes = [
+        {
+            pergunta: "Em que ano o Corinthians foi fundado?",
+            alternativaA: "1900",
+            alternativaB: "1910",
+            alternativaC: "1915",
+            alternativaD: "1920",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            pergunta: "Qual é o apelido do Corinthians?",
+            alternativaA: "Tricolor",
+            alternativaB: "Galo",
+            alternativaC: "Timão",
+            alternativaD: "Leão",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            pergunta: "Quem foi o primeiro grande ídolo do Corinthians?",
+            alternativaA: "Sócrates",
+            alternativaB: "Rivelino",
+            alternativaC: "Casagrande",
+            alternativaD: "Neto",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            pergunta: "Qual estádio o Corinthians inaugurou em 2014?",
+            alternativaA: "Maracanã",
+            alternativaB: "Arena Corinthians",
+            alternativaC: "Pacaembu",
+            alternativaD: "Mineirão",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            pergunta: "Qual foi o maior rival histórico do Corinthians?",
+            alternativaA: "São Paulo",
+            alternativaB: "Palmeiras",
+            alternativaC: "Santos",
+            alternativaD: "Flamengo",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            pergunta: "Quem foi o técnico do Corinthians na conquista da Libertadores de 2012?",
+            alternativaA: "Tite",
+            alternativaB: "Luxemburgo",
+            alternativaC: "Muricy Ramalho",
+            alternativaD: "Felipão",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            pergunta: "Qual foi o maior título conquistado pelo Corinthians em sua história?",
+            alternativaA: "Copa do Brasil",
+            alternativaB: "Libertadores da América",
+            alternativaC: "Mundial de Clubes",
+            alternativaD: "Campeonato Brasileiro",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            pergunta: "Quem é o maior artilheiro da história do Corinthians?",
+            alternativaA: "Ronaldo Fenômeno",
+            alternativaB: "Júnior",
+            alternativaC: "Léo Jabá",
+            alternativaD: "Luizão",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            pergunta: "Em que ano o Corinthians conquistou seu primeiro Campeonato Brasileiro?",
+            alternativaA: "1975",
+            alternativaB: "1990",
+            alternativaC: "2000",
+            alternativaD: "2005",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            pergunta: "Qual é o nome da torcida organizada do Corinthians?",
+            alternativaA: "Gaviões da Fiel",
+            alternativaB: "Palmeirenses",
+            alternativaC: "Mancha Verde",
+            alternativaD: "Força Jovem",
+            alternativaCorreta: "alternativaA"
+        }
+    ];
+
+    const btnRestart = document.querySelector('.finsh button');
+    const questions = document.querySelector('#questions');
+    const answers = document.querySelector('.anwsers');
+    const spanQtd = document.querySelector('#spanQtd');
+    const content = document.querySelector('.conteiner');
+    const contentFinish = document.querySelector('.finsh');
+
+    var currentQuestionIndex = 0;
+    var questionsCorrectsIndex = 0;
+
+    btnRestart.onclick = () => {
+        currentQuestionIndex = 0;
+        questionsCorrectsIndex = 0;
+        contentFinish.style.display = "none";
+        content.style.display = "flex";
+        loadQuestions();
+    };
+
+    function nextQuestion(e) {
+        const selectedAnswer = e.target;
+        if (selectedAnswer.getAttribute("data-correct") === "true") {
+            questionsCorrectsIndex++;
+        }
+
+        if (currentQuestionIndex < listaDeQuestoes.length - 1) {
+            currentQuestionIndex++;
+            loadQuestions();
+        } else {
+            finish();
+        }
+    }
+
+
+
+    function finish() {
+        content.style.display = "none";
+        const texto = `O jogo chegou ao fim! Você acertou ${questionsCorrectsIndex} questão(s). Deseja tentar mais uma vez?`;
+
+        Swal.fire({
+
+            title: texto,
+            text: 'Você deseja finalizar o jogo?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Cancelar',
+            width: 800,
+            padding: "2em",
+            color: "#fff",
+            background: "#201e1e",
+            backdrop: ` rgb(32, 30, 30, 0.8)`,
+            confirmButtonText: 'Sim',
+            confirmButtonColor: '#ff3737'
+        }).then(function (result) {
+
+            if (result.isConfirmed) {
+                window.location.href = "questions.html";
+                enviar()
+
+            } else {
+                window.location.href = "dashboard.html";
+                enviar()
+
+            }
+        });
+    }
+
+
+
+    function loadQuestions() {
+        const item = listaDeQuestoes[currentQuestionIndex];
+        spanQtd.innerHTML = `${currentQuestionIndex + 1}/${listaDeQuestoes.length}`;
+        questions.innerHTML = item.pergunta;
+        answers.innerHTML = '';
+
+        const alternatives = [
+            { label: item.alternativaA, value: 'alternativaA' },
+            { label: item.alternativaB, value: 'alternativaB' },
+            { label: item.alternativaC, value: 'alternativaC' },
+            { label: item.alternativaD, value: 'alternativaD' }
+        ];
+
+        alternatives.forEach((alternative) => {
+            const div = document.createElement("div");
+            div.innerHTML = `
+                <button class="btn_alternatives" data-correct="${alternative.value === item.alternativaCorreta}" onclick="nextQuestion(event)">
+                    ${alternative.label}
+                </button>
+            `;
+            answers.appendChild(div);
+        });
+    }
+
+    loadQuestions();
+
+
+
+    function enviar() {
+        var qtdAcertosVar = questionsCorrectsIndex
+        var idUsuarioVar = sessionStorage.ID_USUARIO
+        idUsuarioVar= parseInt(idUsuarioVar)
+
+        fetch("/questionario/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                qtdAcertosServer: qtdAcertosVar,
+                idUsuarioServer: idUsuarioVar,
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    
+</script>

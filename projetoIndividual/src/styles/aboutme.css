@@ -8,7 +8,7 @@
 
 #aboutme_img {
     width: 600px;
-    height: 650px;
+    height: 750px;
     border-radius: 10px;
 }
 #aboutme .section-title span{
@@ -27,7 +27,7 @@
     width: 50%;
 }
 
-#feedbacks {
+#about-history {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -35,7 +35,7 @@
     margin-top: 30px;
 }
 
-.feedback {
+.aboutme-card {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -44,22 +44,18 @@
     border-radius: 12px;
     box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.1);
 }
-.feedback-title{
+.aboutme-title{
     font-weight: bolder;
+    color: var(--color-primary-3);
+    font-size: 20px;
 }
 
-.feedback-numeros {
-    border-radius: 100%;
-    object-fit: cover;
-    font-size: 50px;
-}
-
-.feedback-content p {
+.aboutme-content p {
     display: flex;
     justify-content: space-between;
 }
 
-.feedback-content p span {
+.aboutme-content p span {
     color: var(--color-primary-6);
 }
 

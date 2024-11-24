@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil || Loucos por Corinthians</title>
+    <link rel="stylesheet" href="./styles/profilie.css">
+</head>
+
+<body>
+    <div class="profile-container">
+        <h1>Atualizar Perfil</h1>
+
+        <form onsubmit=" return atualizarDados(event)">
+            <div class="profile-section">
+                <label for="profile-photo" class="profile-photo-label">
+                    <img src="./assets/perfil/" id="profile-photo" alt="Foto de perfil">
+                </label>
+                <input type="file" id="profile-photo-input" class="hidden" onchange="previewPhoto(event)">
+            </div>
+            <div class="input-box">
+                <input class="in" type="text" id="nome_input">
+            </div>
+            <div class="input-box">
+                <input type="email" id="email_input">
+            </div>
+            <div class="input-box">
+                <input type="text" id="senha_input">
+            </div>
+            <div class="input-box">
+                <input type="text" id="cpf_input">
+            </div>
+
+            <div class="input-box">
+                <button value="Atualizar Dados" type="submit">Atualizar Dados</button>
+                <button value="Voltar" type="button" onclick="Voltar()">Voltar</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Função para buscar dados do usuário
+        function buscarDados() {
+            const idUsuario = sessionStorage.getItem('ID_USUARIO');
+
+            if (!idUsuario) {
+                console.error("ID do usuário não encontrado.");
+                return;
+            }
+
+            console.log("ID do usuário:", idUsuario);
+
+            fetch(`/usuarios/buscar/${idUsuario}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Falha ao buscar dados do usuário');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Dados do usuário recebidos:", data);
+
+                    if (data && Array.isArray(data) && data.length > 0) {
+                        const usuario = data[0];
+
+                        // Armazenando os dados no sessionStorage
+                        sessionStorage.setItem('nome', usuario.nome || '');
+                        sessionStorage.setItem('email', usuario.email || '');
+                        sessionStorage.setItem('senha', usuario.senha || '');
+                        sessionStorage.setItem('cpf', usuario.cpf || '');
+                        sessionStorage.setItem('imagem', usuario.imagem || './assets/perfil/default-photo.png');
+                    } else {
+                        console.error('Nenhum dado válido foi retornado para o usuário.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados do usuário:', error);
+                });
+        }
+
+        // Função para preencher o formulário com dados armazenados
+        function preencherFormulario() {
+            console.log("Preenchendo formulário...");
+
+            const nome = sessionStorage.getItem('nome');
+            const email = sessionStorage.getItem('email');
+            const senha = sessionStorage.getItem('senha');
+            const cpf = sessionStorage.getItem('cpf');
+            const imagem = sessionStorage.getItem('imagem');
+
+            const nomeInput = document.getElementById('nome_input');
+            const emailInput = document.getElementById('email_input');
+            const senhaInput = document.getElementById('senha_input');
+            const cpfInput = document.getElementById('cpf_input');
+            const profilePhoto = document.getElementById('profile-photo');
+
+            if (nomeInput && nome) nomeInput.value = nome;
+            if (emailInput && email) emailInput.value = email;
+            if (senhaInput && senha) senhaInput.value = senha;
+            if (cpfInput && cpf) cpfInput.value = cpf;
+
+            if (profilePhoto) {
+                if (imagem) {
+                    profilePhoto.src = `./assets/perfil/${imagem}`;
+                } else {
+                    profilePhoto.src = './assets/perfil/default-photo.png';
+                }
+            }
+        }
+
+        function atualizarDados(event) {
+            event.preventDefault();
+
+            const idUsuario = sessionStorage.getItem('ID_USUARIO');
+            const nome = document.getElementById('nome_input').value;
+            const email = document.getElementById('email_input').value;
+            const senha = document.getElementById('senha_input').value;
+            const cpf = document.getElementById('cpf_input').value;
+
+            fetch("/usuarios/atualizar", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    cpfServer: cpf,
+                    nomeServer: nome,
+                    emailServer: email,
+                    senhaServer: senha,
+                    idUsuarioServer: idUsuario
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                        setTimeout(() => {
+                            window.location = "dashboard.html";
+                        }, "2000");
+
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+        }
+
+        window.onload = function () {
+            buscarDados();
+            preencherFormulario();
+
+        };
+    </script>
+</body>
+
+</html>

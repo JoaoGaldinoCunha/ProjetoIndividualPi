@@ -33,7 +33,7 @@ header {
     font-weight: 600;
 }
 
-.nav-item.active a {
+.nav-item :hover {
     color: var(--color-neutral-0);
     border-bottom: 3px solid var(--color-primary-4);
 }

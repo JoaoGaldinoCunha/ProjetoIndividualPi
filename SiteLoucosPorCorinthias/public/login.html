@@ -1,0 +1,97 @@
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Loucos Por Corinthians || Login </title>
+  <link rel="stylesheet" href="./styles/login.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="content">
+      <div class="image-box">
+        <img src="./images/corinthians/socrates.png" alt="">
+      </div>
+      <form action="#" onsubmit="return entrar()">
+        <div class="topic">Bem-vindo novamente campeão!</div>
+        <div class="input-box">
+          <input type="text" required id="email_input">
+          <label>Email</label>
+        </div>
+        <div class="input-box">
+          <input type="text" required id="senha_input">
+          <label>Senha</label>
+        </div>
+        <div class="input-box">
+          <button value="Entre Agora!" type="submit" >Entre Agora!</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  function entrar() {
+
+    var emailVar = email_input.value
+    var senhaVar = senha_input.value
+
+    if (emailVar == "" || senhaVar == "") {
+      return false;
+    }
+
+    console.log("FORM LOGIN: ", emailVar)
+    console.log("FORM SENHA: ", senhaVar)
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      })
+    })
+      .then(resposta => {
+        if (!resposta.ok) {
+          throw new Error(`Erro na resposta: ${resposta.statusText}`)
+        }
+        return resposta.json()
+      })
+      .then(json => {
+        console.log("Resultado do login:", json)
+
+        // Armazena os dados no sessionStorage
+        sessionStorage.EMAIL_USUARIO = json.email;
+        sessionStorage.NOME_USUARIO = json.nome;
+        sessionStorage.ID_USUARIO = json.idUsuario;
+
+        setTimeout(function () {
+          window.location = "./dashboard.html"
+        }, 1000)
+      })
+      .catch(erro => {
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="register.html" style="color: white;">Se não tiver uma conta, faça seu cadastro.</a>',
+          color: "#fff",
+          background: "#201e1e",
+          backdrop: `rgb(32, 30, 30, 0.8)`,
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#ff3737'
+        })
+
+      })
+
+
+    return false
+  }
+
+
+</script>

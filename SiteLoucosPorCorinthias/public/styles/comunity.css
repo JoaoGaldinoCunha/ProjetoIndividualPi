@@ -1,0 +1,313 @@
+:root {
+  --color-primary-1: #201e1e;
+  --color-primary-2: #f50009a1;
+  --color-primary-3: #EB1C24;
+  --color-primary-4: #DFDFDF;
+  --color-primary-5: #ebdc13;
+  --color-primary-6: #363636;
+  --color-neutral-0: #fff;
+  --color-neutral-1: #1d1d1d;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  min-height: 100vh; /* Garante que o corpo ocupe pelo menos a altura da janela */
+  background-image: url(../images/Simple\ Shiny.svg); /* Caminho da imagem */
+  background-size: cover; /* Faz a imagem cobrir toda a tela */
+  background-position: center center; /* Centraliza a imagem */
+  background-attachment: fixed; /* Fixar a imagem ao fundo da tela */
+  background-repeat: no-repeat; /* Impede a repetição da imagem */
+  position: relative; /* Garante que o conteúdo dentro do body seja posicionado corretamente */
+}
+
+main{
+  display: flex;
+}
+
+
+.sidebar {
+  position: relative;
+  width: 270px;
+  margin: 16px;
+  border-radius: 16px;
+  background: var(--color-neutral-1);
+  height: calc(100vh - 32px);
+  transition: all 0.4s ease;
+}
+
+.sidebar.collapsed {
+  width: 85px;
+}
+
+.sidebar .sidebar-header {
+  display: flex;
+  position: relative;
+  padding: 25px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-header .header-logo img {
+  width: 46px;
+  height: 46px;
+  display: block;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.sidebar-header .toggler {
+  height: 35px;
+  width: 35px;
+  color: #151A2D;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: 0.4s ease;
+}
+
+.sidebar-header .menu-toggler {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-header .toggler {
+  transform: translate(-4px, 65px);
+}
+
+.sidebar-header .toggler span {
+  font-size: 1.75rem;
+  transition: 0.4s ease;
+}
+
+.sidebar.collapsed .sidebar-header .toggler span {
+  transform: rotate(180deg);
+}
+
+.sidebar-nav .nav-list {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  padding: 0 15px;
+  flex-direction: column;
+  transform: translateY(15px);
+  transition: 0.4s ease;
+}
+
+.sidebar.collapsed .sidebar-nav .primary-nav {
+  transform: translateY(65px);
+}
+
+.sidebar-nav .nav-link {
+  color: #fff;
+  display: flex;
+  gap: 12px;
+  white-space: nowrap;
+  border-radius: 8px;
+  padding: 12px 15px;
+  align-items: center;
+  text-decoration: none;
+  transition: 0.4s ease;
+}
+
+.sidebar.collapsed .sidebar-nav .nav-link {
+  border-radius: 12px;
+}
+
+.sidebar .sidebar-nav .nav-link .nav-label {
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-nav .nav-link .nav-label {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-nav .nav-link:hover {
+  color: #151A2D;
+  background: #fff;
+}
+
+.sidebar-nav .nav-item {
+  position: relative;
+}
+
+.sidebar-nav .nav-tooltip {
+  position: absolute;
+  top: -10px;
+  opacity: 0;
+  color: #151A2D;
+  display: none;
+  pointer-events: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  background: #fff;
+  left: calc(100% + 25px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: 0s;
+}
+
+.sidebar.collapsed .sidebar-nav .nav-tooltip {
+  display: block;
+}
+
+.sidebar-nav .nav-item:hover .nav-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(50%);
+  transition: all 0.4s ease;
+}
+
+.sidebar-nav .secondary-nav {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+}
+
+.posts {
+  position: relative;
+  background-color: var(--color-primary-6);
+  min-height: 100vh;
+  width: calc(100% - 50px);
+  padding: 10px 14px;
+}
+
+.title {
+  color: var(--color-primary-4);
+  font-size: 30px; /* Aumentando o tamanho do título */
+  font-weight: 600;
+  padding-bottom: 40px;
+}
+
+.boxes {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.boxes .box {
+  background-color: var(--color-neutral-0);
+  padding: 20px; /* Aumentando o padding das postagens */
+  width: 100%; /* Ajuste para 100% para ocupar o máximo de espaço disponível */
+  max-width: 800px; /* Limitar a largura máxima para não expandir demais */
+  height: auto;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.boxes .box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.boxes .box .text {
+  font-size: 24px; /* Aumentando o tamanho da fonte do título das postagens */
+  font-weight: 600;
+  color: var(--color-neutral-1);
+  margin-top: 15px;
+}
+
+.boxes .box.box1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.boxes-content {
+  padding-top: 10px;
+  font-size: 18px; /* Aumentando o tamanho da fonte do conteúdo */
+  color: #666;
+  line-height: 1.8;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-img {
+  width: 80px; /* Aumentando o tamanho da imagem do usuário */
+  height: 80px; /* Garantindo que a imagem seja circular */
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-name {
+  font-weight: 700;
+  font-size: 22px; /* Aumentando o tamanho do nome do usuário */
+  color: #333;
+}
+
+.post-teme {
+  font-weight: 700;
+  font-size: 24px; /* Aumentando o tamanho do título da postagem */
+  color: #333;
+}
+
+.post-date {
+  font-size: 16px; /* Aumentando o tamanho da data */
+  color: #999;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.post-date-like {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+
+.like-btn {
+  cursor: pointer;
+  font-size: 28px; /* Aumentando o tamanho do ícone de like */
+}
+
+.like-btn.active {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .boxes .box {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 30px; /* Ajustando o tamanho do título no mobile */
+  }
+
+  .boxes-content {
+    font-size: 16px;
+  }
+
+  .user-info .user-name {
+    font-size: 18px;
+  }
+
+  .user-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .post-teme {
+    font-size: 20px;
+  }
+}

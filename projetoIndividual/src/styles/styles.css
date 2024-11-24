@@ -8,6 +8,7 @@
 @import url('swiper.css');
 @import url('aboutme.css');
 @import url('objectivesOnu.css');
+
 :root {
     --color-primary-1: #201e1e;
     --color-primary-2: #f50009a1;
@@ -33,10 +34,12 @@ html {
 body {
     background-color: var(--color-primary-1);
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 section {
     padding: 28px 8%;
+    padding-bottom: 40px;
 }
 
 .btn-default {

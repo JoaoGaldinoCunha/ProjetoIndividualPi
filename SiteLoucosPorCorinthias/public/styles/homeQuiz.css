@@ -1,0 +1,112 @@
+:root {
+    --color-primary-1: #201e1e;
+    --color-primary-2: #f50009a1;
+    --color-primary-3: #EB1C24;
+    --color-primary-4: #DFDFDF;
+    --color-primary-6: #363636;
+    --color-neutral-0: #fff;
+    --color-neutral-1: #1d1d1d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url(../images/Simple\ Shiny.svg); /* Caminho correto para a imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--color-neutral-0);
+    font-size: 18px;
+}
+
+.home-container {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    padding: 40px;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px); 
+}
+
+.quiz-info h1 {
+    font-size: 40px;
+    color: var(--color-primary-0);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.quiz-info p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    color: var(--color-neutral-0);
+}
+
+.quiz-info ul {
+    list-style-type: disc;
+    text-align: left;
+    font-size: 18px;
+    margin-left: 20px;
+    color: var(--color-neutral-0);
+}
+
+.quiz-info li {
+    margin-bottom: 10px;
+}
+
+.quiz-info img {
+    max-width: 100%;
+    height: auto;
+    margin: 30px 0;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.start-btn {
+    background-color: var(--color-primary-3);
+    color: var(--color-neutral-0);
+    font-size: 20px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.start-btn:hover {
+    background-color: var(--color-primary-2);
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .home-container {
+        padding: 20px;
+    }
+
+    .quiz-info h1 {
+        font-size: 30px;
+    }
+
+    .quiz-info p,
+    .quiz-info ul {
+        font-size: 16px;
+    }
+
+    .start-btn {
+        font-size: 18px;
+        padding: 12px 25px;
+    }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Tela Inicial</title>
+    <link rel="stylesheet" href="./styles/homeQuiz.css"> <!-- Link para o arquivo CSS -->
+</head>
+
+<body>
+    <section class="home-container">
+        <div class="quiz-info">
+            <h1>Bem-vindo ao Quiz!</h1>
+            <p>Este é um quiz divertido para testar seus conhecimentos. Responda as perguntas e veja quantos pontos você consegue alcançar!</p>
+            <p><strong>Como Funciona:</strong></p>
+            <ul>
+                <li>Você terá um conjunto de perguntas.</li>
+                <li>Cada pergunta tem quatro opções de resposta.</li>
+                <li>Escolha a resposta correta para ganhar pontos!</li>
+                <li>Ao final, você verá seu resultado.</li>
+            </ul>
+
+            <img src="./images/corinthians/questions.png" alt="">
+            
+            <button class="start-btn" onclick="iniciarQuiz()">Iniciar Quiz</button>
+
+            <button class="start-btn" onclick="voltar()">Voltar</button>
+        </div>
+    </section>
+
+    <script>
+        function iniciarQuiz() {
+            window.location.href = "questions.html"
+        }
+
+        function voltar() {
+            window.history.back()
+        }
+    </script>
+</body>
+
+</html>

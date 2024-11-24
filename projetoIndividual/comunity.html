@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBorad Menu | Loucos por Corinthians</title>
+    <link rel="stylesheet" href="./src/styles/comunity.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script>"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"</script>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <header class="sidebar-header">
+            <a href="#" class="header-logo">
+                <img src="./src/images/corinthians/logo/logoCorinthians.svg" alt="CodingNepal">
+            </a>
+            <button class="toggler sidebar-toggler">
+                <span class="material-symbols-rounded">chevron_left</span>
+            </button>
+            <button class="toggler menu-toggler">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
+        </header>
+        <nav class="sidebar-nav">
+            <ul class="nav-list primary-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon material-symbols-rounded">dashboard</span>
+                        <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="material-symbols-outlined"> drafts</span>
+                        <span class="nav-label">Postagens</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="material-symbols-outlined">forum</span>
+                        <span class="nav-label">Minhas Mensagens</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav-list secondary-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon material-symbols-rounded">logout</span>
+                        <span class="nav-label">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+
+    <section class="posts">
+        <div class="posts-content">
+                <div class="title">
+                    <span class="text">Ultimas postagens:</span>
+                </div>
+                <div class="boxes">
+                    <div class="box box1">
+                        <div class="user-info">
+                            <img class="user-img" src="https://via.placeholder.com/60" alt="Imagem do usuário">
+                            <span class="user-name">Nome Usuário</span>
+                        </div>
+                        <div>
+                            <p class="post-teme">Topico</p>
+                        </div>
+                        <div class="post-date-like">
+                            <span>Hoje</span>
+                            <span class="material-symbols-outlined" id="like"  onclick="Like()">
+                                favorite
+                                </span>
+
+                        </div>
+
+                        <div class="boxes-content">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora, numquam quasi! Iusto
+                            tempore labore eum quaerat maiores repellat numquam, sequi repellendus quos adipisci
+                            obcaecati aliquam ea omnis fugit nostrum ut.
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+</body>
+</html>
+<script>
+    function Like() {
+        var like = document.getElementById("like");
+        like.classList.toggle("active");
+    }
+</script>

@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+    --color-primary-1: #201e1e;
+    --color-primary-2: #f50009a1;
+    --color-primary-3: #EB1C24;
+    --color-primary-4: #DFDFDF;
+    --color-primary-5: #ebdc13;
+    --color-primary-6: #363636;
+    --color-neutral-0: #fff;
+    --color-neutral-1: #1d1d1d;
+    --new-black: #000;
+    --warning-light: #ff9900;
+    --danger-light: #ff3737;
+}
+
+/* Estilo do corpo da página */
+body {
+    background-image: url('../images/corinthians/festaTorcida.webp');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    margin: 0; 
+    flex-direction: column;
+    color: var(--color-primary-4); 
+    width: 100%;
+}
+main{
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.conteiner{
+    background-color: #201e1e;
+    width: 100%;
+    height:420px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.finsh{
+    display: none;
+}
+button {
+    font-family:  "Poppins", sans-serif;;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    height: 60px;
+    background-color: #EB1C24;
+    border-radius: 10px;
+    border-style: none;
+}
+
+.btn_alternatives{
+    margin: 2px;
+    width: 100%;
+}
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    #pontuacao, #jogo {
+        width: 100%;
+        max-width: none;
+    }
+    #btnIniciarQuiz {
+        width: 100%;
+    }
+}
