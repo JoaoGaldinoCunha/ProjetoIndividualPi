@@ -210,7 +210,9 @@
             })
             .then(data => {
                 if (data.length > 0) {
-                    renderPostagens(data); // Chama a função para renderizar as postagens
+
+                    //renderizar postagens
+                    renderPostagens(data); 
                 } else {
                     customSwal('Nenhuma postagem encontrada!');
                     document.getElementById('postagens-container').innerHTML = '<p>Não há postagens para exibir.</p>';

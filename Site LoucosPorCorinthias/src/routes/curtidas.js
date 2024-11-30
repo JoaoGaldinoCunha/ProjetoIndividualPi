@@ -20,4 +20,11 @@ router.get("/listar", function (req, res) {
   curtidasController.listar(req, res);
 });
 
+router.post("/mediaCurtidas",function(req,res){
+  curtidasController.buscarMediaDeCurtidas(req,res)
+})
+
+router.post("/maiorPostagemCurtidas",function(req,res){
+  curtidasController.buscarMaiorPostagemComCurtida(req,res)
+})
 module.exports = router;

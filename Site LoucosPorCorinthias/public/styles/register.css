@@ -12,18 +12,9 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fae9fb;
+  background-image: url(../images/Simple\ Shiny.svg);
+
   position: relative;
-}
-body::before{
-  content: '';
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  background: #201e1e;
-  clip-path: polygon(86% 0, 100% 0, 100% 100%, 60% 100%);
 }
 .container{
   z-index: 12;

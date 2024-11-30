@@ -14,7 +14,7 @@
     <script>"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"</script>
 </head>
 
-<body onload="obterDadosGrafico2() ,obterDadosGrafico()">
+<body onload="mediaErrosQuestionario(),  obterDadosGrafico2(), obterDadosGrafico(), mediaCurtidas(), maiorPostagemCurtida(), mediaAcertosQuestionario()" >
 
     <aside class="sidebar">
         <header class="sidebar-header">
@@ -73,24 +73,26 @@
                 <div class="boxes">
                     <div class="box box1">
                         <i class="uil uil-thumbs-up"></i>
-                        <span class="text">Postagens mais curtida</span>
-                        <span class="number">50,120</span>
+                        <span class="text">Postagem mais curtida</span>
+                        <span class="number" id="maisCurtida"> </span>
+                        <span class="text" id="tituloPostagem"> </span>
+
                     </div>
                     <div class="box box2">
                         <i class="uil uil-comments"></i>
-                        <span class="text">Média de cutidas</span>
-                        <span class="number">20,120</span>
+                        <span class="text">Média de curtidas</span>
+                        <span class="number" id="mediaCurtidas"></span>
                     </div>
                     <div class="box box3">
                         <i class="uil uil-share"></i>
                         <span class="text"> Média de acertos por quiz</span>
-                        <span class="number">10,120</span>
+                        <span class="number" id="mediaAcertos"></span>
                     </div>
 
                     <div class="box box4">
                         <i class="uil uil-thumbs-up"></i>
                         <span class="text">Média de erros por tentativa</span>
-                        <span class="number">50,120</span>
+                        <span class="number" id="media_erros_geral"></span>
                     </div>
                 </div>
             </div>
@@ -248,7 +250,7 @@
         const dados = {
             labels: labels,
             datasets: [{
-                label: 'Curtidas',
+                label: 'Acertos',
                 data: data,
                 fill: false,
                 borderColor: '#fff',
@@ -294,4 +296,164 @@
         new Chart(questionario, config);
 
     }
+
+
+
+
+function mediaCurtidas() {
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+  if (!idUsuario) {
+    console.error("ID do usuário não encontrado no sessionStorage.");
+    return;
+  }
+
+  fetch(`/curtidas/mediaCurtidas`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                idUsuario: idUsuario,
+            })
+  })
+    .then((resposta) => resposta.json())
+    .then((kpis) => {
+      console.log("KPI média de curtida recebidas com sucesso:", kpis);
+      // Atualiza os elementos do HTML com KPIs
+      const kpiFormatado = parseFloat(kpis[0].curtidas_media_geral).toFixed(1);
+
+      document.getElementById("mediaCurtidas").innerText = kpiFormatado;
+
+      
+    })
+    .catch((erro) => {
+      console.error("Erro ao obter KPI  média de curtida:", erro.message);
+      alert(erro.message || "Erro ao carregar os dados de  média de curtida. Tente novamente.");
+    });
+}
+
+
+function maiorPostagemCurtida() {
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+  if (!idUsuario) {
+    console.error("ID do usuário não encontrado no sessionStorage.");
+    return;
+  }
+
+  fetch(`/curtidas/maiorPostagemCurtidas`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                idUsuario: idUsuario,
+            })
+  })
+    .then((resposta) => resposta.json())
+    .then((kpis) => {
+      console.log("KPI maisCurtida de curtida recebidas com sucesso:", kpis);
+      // Atualiza os elementos do HTML com KPIs
+        document.getElementById("maisCurtida").innerText =  kpis[0].curtidas;
+        document.getElementById("tituloPostagem").innerText =`titulo:`+ kpis[0].titulo;
+
+    
+        
+    })
+    .catch((erro) => {
+      console.error("Erro ao obter KPI  maisCurtida de curtida:", erro.message);
+    });
+
+}
+
+
+function mediaCurtidas() {
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+  if (!idUsuario) {
+    console.error("ID do usuário não encontrado no sessionStorage.");
+    return;
+  }
+
+  fetch(`/curtidas/mediaCurtidas`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                idUsuario: idUsuario,
+            })
+  })
+    .then((resposta) => resposta.json())
+    .then((kpis) => {
+      console.log("KPI média de curtida recebidas com sucesso:", kpis);
+      // Atualiza os elementos do HTML com KPIs
+      const kpiFormatado = parseFloat(kpis[0].curtidas_media_geral).toFixed(1);
+
+      document.getElementById("mediaCurtidas").innerText = kpiFormatado;
+
+      
+    })
+    .catch((erro) => {
+      console.error("Erro ao obter KPI  média de curtida:", erro.message);
+    });
+}
+
+
+function mediaAcertosQuestionario() {
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+  if (!idUsuario) {
+    console.error("ID do usuário não encontrado no sessionStorage.");
+    return;
+  }
+
+  fetch(`/questionario/acertosPorQuestionario`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                idUsuario: idUsuario,
+            })
+  })
+    .then((resposta) => resposta.json())
+    .then((kpis) => {
+      console.log("KPI acertosQuestionario de curtida recebidas com sucesso:", kpis);
+      // Atualiza os elementos do HTML com KPIs
+      const kpiFormatado = parseFloat(kpis[0].media_acertos_geral).toFixed(1);
+
+      document.getElementById("mediaAcertos").innerText = kpiFormatado ;
+
+      
+    })
+    .catch((erro) => {
+      console.error("Erro ao obter KPI  acertosQuestionario de curtida:", erro.message);
+    });
+}
+
+
+function mediaErrosQuestionario() {
+  const idUsuario = sessionStorage.getItem("ID_USUARIO");
+
+  if (!idUsuario) {
+    console.error("ID do usuário não encontrado no sessionStorage.");
+    return;
+  }
+
+  fetch(`/questionario/mediaDeErrosQuestionario`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                idUsuario: idUsuario,
+            })
+  })
+    .then((resposta) => resposta.json())
+    .then((kpis) => {
+      console.log("KPI erros de questionario recebidas com sucesso:", kpis);
+      // Atualiza os elementos do HTML com KPIs
+      const kpiFormatado = parseFloat(kpis[0].media_erros_por_tentativa).toFixed(1);
+      document.getElementById("media_erros_geral").innerText = kpiFormatado ;
+
+      
+    })
+    .catch((erro) => {
+      console.error("Erro ao obter KPI  erros questionario:", erro.message);
+      alert(erro.message || "Erro ao carregar os dados de  quetionario . Tente novamente.");
+    });
+}
+
 </script>

@@ -1,74 +1,118 @@
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Loucos Por Corinthians || Register</title>
+    <link rel="stylesheet" href="./styles/register.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Loucos Por Corinthians || Register </title>
-  <link rel="stylesheet" href="./styles/register.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-  <div class="container">
-    <div class="content">
-      <form action="#">
-        <div class="topic-titulo">Cadastre-se</div>
-        <div class="topic">Faça pate da hístoria!</div>
-        <div class="input-box">
-          <input type="text" required id="nome_input">
-          <label>Nome</label>
+  <body>
+    <div class="container">
+      <div class="content">
+        <form action="#">
+          <div class="topic-titulo">Cadastre-se</div>
+          <div class="topic">Faça pate da hístoria!</div>
+          <div class="input-box">
+            <input type="text"  id="nome_input" />
+            <label>Nome</label>
+          </div>
+          <div class="input-box">
+            <input type="text"  id="cpf_input" />
+            <label>CPF</label>
+          </div>
+          <div class="input-box">
+            <input type="text"  id="email_input" />
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <input type="text"  id="senha_input" />
+            <label>Senha</label>
+          </div>
+          <div class="input-box-picture">
+            <input name="foto" id="foto" type="file" />
+          </div>
+          <div class="input-box">
+            <button value="Entre Agora!" onclick="enviar()">
+              Entre Agora!
+            </button>
+          </div>
+        </form>
+        <div class="image-box">
+          <img
+            src="./images/corinthians/revelino-removebg-preview.png"
+            alt=""
+          />
         </div>
-        <div class="input-box">
-          <input type="text" required id="cpf_input">
-          <label>CPF</label>
-        </div>
-        <div class="input-box">
-          <input type="text" required id="email_input">
-          <label>Email</label>
-        </div>
-        <div class="input-box">
-          <input type="text" required id="senha_input">
-          <label>Senha</label>
-        </div>
-        <div class="input-box-picture">
-          <input name="foto" id="foto" type="file" />
-        </div>
-        <div class="input-box">
-          <button value="Entre Agora!" onclick="enviar()">Entre Agora!</button>
-        </div>
-      </form>
-      <div class="image-box">
-        <img src="./images/corinthians/revelino-removebg-preview.png" alt="">
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
 <script>
+  function enviar() {
 
+    const nome = nome_input.value;
+    const cpf = cpf_input.value;
+    const email = email_input.value;
+    const senha = senha_input.value;
+    
+    if (nome === "") {
+      return Swal.fire({
+        title: "Erro!",
+        text: "O campo nome é obrigatório.",
+        icon: "warning",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#ff3737",
+      });
+    }
 
-    function enviar() {
+    if (cpf.length != 11) {
+      return Swal.fire({
+        title: "Erro!",
+        text: "O CPF informado é inválido.",
+        icon: "warning",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#ff3737",
+      });
+    }
+
+    if (email.indexOf("@")==-1) {
+      return Swal.fire({
+        title: "Erro!",
+        text: "O email informado é inválido.",
+        icon: "warning",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#ff3737",
+      });
+    }
+
+    if (senha.length < 6) {
+      return Swal.fire({
+        title: "Erro!",
+        text: "A senha precisa ter pelo menos 6 caracteres.",
+        icon: "warning",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "#ff3737",
+      });
+    }
+
+    
     const formData = new FormData();
-    formData.append('foto', foto.files[0])
-    formData.append('nome', nome_input.value)
-    formData.append('email', email_input.value)
-    formData.append('senha', senha_input.value)
-    formData.append('cpf', cpf_input.value)
-
+    formData.append("foto", foto.files[0]);
+    formData.append("nome", nome_input.value);
+    formData.append("email", email_input.value);
+    formData.append("senha", senha_input.value);
+    formData.append("cpf", cpf_input.value);
 
     fetch("/usuarios/cadastro", {
       method: "POST",
-      body: formData
+      body: formData,
     })
-      .then(res => {
-        window.location = "./login.html"
+      .then((res) => {
+        window.location = "login.html";
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }
-
-   
-
- 
 </script>

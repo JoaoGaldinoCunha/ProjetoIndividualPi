@@ -203,7 +203,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 12px;
-  width: calc(20%);
+  width: calc(21%);
   padding: 15px 20px;
   background-color: var(--color-neutral-0);
 }

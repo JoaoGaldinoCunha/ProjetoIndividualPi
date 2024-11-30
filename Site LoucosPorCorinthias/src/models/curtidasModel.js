@@ -14,12 +14,13 @@ function listar() {
 
 function buscarCurtidasPorIdDoUsuario(idUsuario) {
   var instrucaoSql = `		 
-  SELECT titulo,COUNT(idCurtida) as curtidas
-FROM postagens as p
-	LEFT JOIN curtidas as c
-ON p.idPostagens= c.fkPostagem
-	WHERE p.fkUsuario=${idUsuario}
-GROUP BY idPostagens;
+  SELECT p.titulo, COUNT(c.idCurtida) AS curtidas
+    FROM Postagens AS p
+  LEFT JOIN Curtidas AS c ON p.idPostagens = c.fkPostagem
+    WHERE p.fkUsuario = ${idUsuario}
+  GROUP BY p.idPostagens
+    ORDER BY p.data DESC
+  LIMIT 5;
   `;
 
   return database.executar(instrucaoSql);
@@ -31,8 +32,40 @@ function cadastrar(razaoSocial, cnpj) {
   return database.executar(instrucaoSql);
 }
 
+function maiorPostagemCurtida(idUsuario){
+  var instrucaoSql = `
+  SELECT p.titulo, COUNT(c.idCurtida) AS curtidas
+    FROM Postagens AS p
+  LEFT JOIN Curtidas AS c ON p.idPostagens = c.fkPostagem
+    WHERE p.fkUsuario = ${idUsuario}
+  GROUP BY p.idPostagens
+    ORDER BY curtidas DESC
+  LIMIT 1;`;
+  return database.executar(instrucaoSql);
+}
+
+function mediaDeCurtidasPorPostagem(idUsuario){
+var instrucaoSql=`
+
+SELECT AVG(curtidas) AS curtidas_media_geral
+FROM (
+  SELECT COUNT(c.idCurtida) AS curtidas
+  FROM Postagens p
+  LEFT JOIN Curtidas c ON p.idPostagens = c.fkPostagem
+  WHERE p.fkUsuario = ${idUsuario}
+  GROUP BY p.idPostagens
+) AS subconsulta;
+`
+
+return database.executar(instrucaoSql);
+
+}
+
+
 module.exports = {
+  mediaDeCurtidasPorPostagem,
+  maiorPostagemCurtida,
   buscarCurtidasPorIdDoUsuario, 
-  buscarPorId, 
+  buscarPorId,
   cadastrar, 
   listar };

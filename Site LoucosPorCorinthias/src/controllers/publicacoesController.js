@@ -2,8 +2,8 @@ var publicacaoesModel = require("../models/publicacoes");
 
 
 function publicar(req, res) {
-    console.log(req.body);  // Verifique o conteúdo dos dados enviados no corpo da requisição
-    console.log(req.file);  // Verifique se o arquivo de imagem está sendo enviado
+    console.log(req.body); 
+    console.log(req.file); 
 
     var idUsuario = req.params.idUsuario;
     const { titulo, descricao } = req.body;
